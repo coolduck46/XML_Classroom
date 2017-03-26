@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Accounts>
+  <Account>
+    <Username>Student1</Username>
+    <Password>Student1pass</Password>    
+  </Account>
+  
+</Accounts>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Assignments>
+  <assignment>
+    <assignmentname>
+
+    </assignmentname>
+    <assignmentdescription>
+
+    </assignmentdescription>
+    <duedate>
+      <day></day>
+      <month></month>
+      <year></year>
+    </duedate>
+  </assignment>
+
+
+</Assignments>
