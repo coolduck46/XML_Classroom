@@ -56,7 +56,7 @@ namespace AditClassroom
                 {
                     Console.WriteLine("Login Success");
                     int menue1;
-                    Console.WriteLine("Type in 1 if you want to add a assignment and type 2 if you want to edit the schedule");
+                    Console.WriteLine("Type in 1 if you want to add a assignment");
                     menue1 = int.Parse(Console.ReadLine());
                     if (menue1 == 1)
                     {
@@ -97,18 +97,7 @@ namespace AditClassroom
                     {
                         Console.WriteLine("Username or Password is Incorrect");
                     }
-                    if (menue1 == 2)
-                    {
-                        string x = doc3.Root.Element("assignment").Element("assignmentdue").Value;
 
-                        //sort assignments by due date
-                        DateTime now = DateTime.Now;
-                        for (int i = 0; i < 1000; i++)
-                        {
-
-
-                        }
-                    }
 
                 }
                 else
@@ -126,6 +115,28 @@ namespace AditClassroom
                 if (useruser == student1user && userpass == student1pass)
                 {
                     Console.WriteLine("Login Success");
+                    Console.WriteLine("Assignments:");
+                    doc3.Root.Element("Assignment");
+                    List<Assignment> assignments = new List<Assignment>();
+
+                    foreach (XElement task in doc3.Root.Elements("assignment"))
+                    {
+                        string name = task.Element("assignmentname").Value;
+                        string description = task.Element("assignmentdescription").Value;
+
+                        XElement dueDate = task.Element("duedate");
+                        int day = int.Parse(dueDate.Element("day").Value);
+                        int month = int.Parse(dueDate.Element("month").Value);
+                        int year = int.Parse(dueDate.Element("year").Value);
+
+
+                        assignments.Add(new Assignment(name, description, day, month, year));
+                    }
+                    //sort
+
+
+
+
 
                 }
                 else
@@ -153,13 +164,9 @@ namespace AditClassroom
                     }
                     Console.WriteLine("Enter a password");
                     string newPass = Console.ReadLine();
-                    teacheraccounts.Add(new Accounts(newName, newPass));
-                    XElement userElement = new XElement("Username");
-                    userElement.Value = newName;
-                    XElement passElement = new XElement("Password");
-                    passElement.Value = newPass;
-                    XElement accountElement = new XElement("Account", userElement, passElement);
-                    doc1.Root.Add(accountElement);
+                    Accounts newTeacher = new Accounts(newName, newPass);
+                    teacheraccounts.Add(newTeacher);
+                    doc1.Root.Add(newTeacher.ToXML());
                     Console.WriteLine("Account Created");
                 }
 
@@ -177,13 +184,9 @@ namespace AditClassroom
                     }
                     Console.WriteLine("Enter a password");
                     string newPass = Console.ReadLine();
-                    studentaccounts.Add(new Accounts(newName, newPass));
-                    XElement userElement = new XElement("Username");
-                    userElement.Value = newName;
-                    XElement passElement = new XElement("Password");
-                    passElement.Value = newPass;
-                    XElement accountElement = new XElement("Account", userElement, passElement);
-                    doc2.Root.Add(accountElement);
+                    Accounts newStudent = new Accounts(newName, newPass);
+                    studentaccounts.Add(newStudent);
+                    doc2.Root.Add(newStudent.ToXML());
                     Console.WriteLine("Account Created");
 
                 }
