@@ -8,6 +8,12 @@ using System.Xml.Linq;
 /// <summary>
 /// Adit's Program for practicing XML
 /// Date: 3/26/2017
+/// 
+/// if you are logged in as a teacher:
+/// add assignments 
+/// 
+/// if you are a student:
+/// print the assignments
 /// </summary>
 namespace AditClassroom
 {
