@@ -1,0 +1,14 @@
+pwd
+ls
+cd
+
+git:
+clone
+status
+pull
+push origin master
+commit -m "message"
+
+config --global user.name "Username"
+config --global user.email "email@address.com"
+config --local
