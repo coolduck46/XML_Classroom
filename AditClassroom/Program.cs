@@ -12,7 +12,7 @@ using System.Xml.Linq;
 /// Instructions:
 /// if you are logged in as a teacher:
 /// add assignments 
-/// 
+/// 5
 /// if you are a student:
 /// print the assignments
 /// </summary>
@@ -35,14 +35,12 @@ namespace AditClassroom
             List<Accounts> teacheraccounts = new List<Accounts>();
             List<Accounts> studentaccounts = new List<Accounts>();
             List<Assignment> teacherassignments = new List<Assignment>();
-
             foreach (XElement account in doc1.Root.Elements("Account"))
             {
                 string username = account.Element("Username").Value;
                 string password = account.Element("Password").Value;
                 teacheraccounts.Add(new Accounts(username, password));
             }
-
             //login
             Console.WriteLine("If you are a teacher press 1, If you are a student press 2, if you want to create an account press 3");
             login = int.Parse(Console.ReadLine());
@@ -70,7 +68,6 @@ namespace AditClassroom
                         int duemonth = int.Parse(Console.ReadLine());
                         Console.WriteLine("(Enter the year the assignment is due)");
                         int dueyear = int.Parse(Console.ReadLine());
-
                         Assignment assignment1 = new Assignment(name, desc, dueday, duemonth, dueyear);
                         teacherassignments.Add(new Assignment(name, desc, dueday, duemonth, dueyear));
                         XElement nameElement = new XElement("assignmentname");
@@ -78,9 +75,12 @@ namespace AditClassroom
                         XElement descElement = new XElement("assignmentdescription");
                         descElement.Value = desc;
                         XElement dayElement = new XElement("day");
+                        dayElement.Value = dueday.ToString();
                         XElement monthElement = new XElement("month");
+                        monthElement.Value = duemonth.ToString();
                         XElement yearElement = new XElement("year");
-                        XElement dueDateElement = new XElement("duedate", monthElement, dayElement, yearElement);
+                        yearElement.Value = dueyear.ToString();
+                        XElement dueDateElement = new XElement("duedate", dayElement, monthElement, yearElement);
 
                         XElement assignmentElement = new XElement("Assignment", nameElement, descElement, dueDateElement);
                         doc3.Root.Add(assignmentElement);
@@ -91,20 +91,16 @@ namespace AditClassroom
                         {
                             Console.WriteLine("Name:{0}\nDescription:{1}\nDue Date:{2}/{3}/{4}", assignment1.assignmentname, assignment1.assignmentdesc, assignment1.duemonth, assignment1.dueday, assignment1.dueyear);
                         }
-
                     }
                     else
                     {
                         Console.WriteLine("Username or Password is Incorrect");
                     }
-
-
                 }
                 else
                 {
                     Console.WriteLine("Username or Password is incorrect");
                 }
-
             }
             if (login == 2)
             {
@@ -128,15 +124,18 @@ namespace AditClassroom
                         int day = int.Parse(dueDate.Element("day").Value);
                         int month = int.Parse(dueDate.Element("month").Value);
                         int year = int.Parse(dueDate.Element("year").Value);
-
-
                         assignments.Add(new Assignment(name, description, day, month, year));
                     }
-                    //sort
+                    //sort year, month, day
 
+                    for (int i = 0; i < assignments.Count; i++)
+                    {
+                        //check if current year is greater than next year, then swap
+                        //Bubble Sort
 
+                    
 
-
+                    }
 
                 }
                 else
@@ -188,11 +187,9 @@ namespace AditClassroom
                     studentaccounts.Add(newStudent);
                     doc2.Root.Add(newStudent.ToXML());
                     Console.WriteLine("Account Created");
-
                 }
 
             }
-
             doc1.Save("Teacheraccounts.xml");
             doc2.Save("Studentaccounts.xml");
             doc3.Save("Assignments.xml");
