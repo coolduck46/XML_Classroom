@@ -6,8 +6,10 @@ git:
 clone
 status
 pull
-push origin master
+add [file name] -or- git add . (for everything)
 commit -m "message"
+push origin master
+
 
 config --global user.name "Username"
 config --global user.email "email@address.com"
